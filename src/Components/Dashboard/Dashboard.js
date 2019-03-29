@@ -1,9 +1,24 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 class Dashboard extends Component {
+    constructor(){
+        super()
+    }
+
+    componentDidMount(){
+        this.current();
+    }
+
+    current=async()=>{
+        if(!this.props.id){
+            let user = await axios.post('/auth/current');
+            this.props.updateUser(user.data);
+        } 
+    }
+    
     render(){
-        console.log(this.props)
         const {pic,username,id} = this.props
         return(
             <div style={{marginTop:20}}>
@@ -13,6 +28,8 @@ class Dashboard extends Component {
         )
     }
 }
+
+
 
 function mapStateToProps(reduxState){
     const {id,pic,username} = reduxState

@@ -7,7 +7,6 @@ import {withRouter} from 'react-router-dom';
 class App extends Component {
 
   render() {
-    console.log(this.props)
     return (
       <div className="App">
         <Nav location={this.props.location} logout={this.logout}/>
