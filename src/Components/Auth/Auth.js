@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {updateUser,clearUser} from '../../ducks/reducer';
+import {updateUser} from '../../ducks/reducer';
 
 class Auth extends Component {
     constructor(){
@@ -57,13 +57,4 @@ class Auth extends Component {
     }
 }
 
-function mapStateToProps(reduxState){
-    const {username,pic,id} = reduxState;
-    return {
-        username,
-        pic,
-        id
-    }
-}
-
-export default connect(mapStateToProps,{updateUser,clearUser})(Auth) 
+export default connect('',{updateUser})(Auth) 
