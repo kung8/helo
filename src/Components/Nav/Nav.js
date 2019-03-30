@@ -14,16 +14,19 @@ class Nav extends Component {
       }
 
     render(){
+        const {username,pic} = this.props;
         if(this.props.location.pathname !== '/'){
             return (
                 <div>
+                    <h1>{username}</h1>
+                    <img style={{height:100,width:100,borderRadius:'50%'}} src={pic} alt="profile pic"/>
                     <Link to='/dashboard'>
                         <button>Home</button>
                     </Link>
                     <Link to='/new'>
                         <button>New Post</button>
                     </Link>
-                        <button onClick={this.logout}>Logout</button>
+                    <button onClick={this.logout}>Logout</button>
                 </div>
             )
         }

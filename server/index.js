@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const ctrl = require('./controller');
+const authCtrl = require('./auth/authController');
+const postCtrl = require('./posts/postsController');
+
 const session = require('express-session');
 const massive = require('massive');
 const {SERVER_PORT,CONNECTION_STRING,SESSION_SECRET} = process.env;
@@ -25,10 +27,15 @@ massive(CONNECTION_STRING).then(db=>{
     ))
 })
 
-//ENDPOINTS
-app.post('/auth/register',ctrl.register);
-app.post('/auth/login',ctrl.login);
-app.post('/auth/current',ctrl.current);
-app.post('/auth/logout',ctrl.logout);
+//AUTH ENDPOINTS
+app.post('/auth/register',authCtrl.register);
+app.post('/auth/login',authCtrl.login);
+app.post('/auth/current',authCtrl.current);
+app.post('/auth/logout',authCtrl.logout);
 
+//POST ENDPOINTS
+app.get('/posts/getAll',postCtrl.getAllPosts);
+app.get('/posts/getUser',postCtrl.getUserPosts);
+app.get('/post/get/:postid',postCtrl.getPost);
+app.post('/post/add',postCtrl.addPost);
 
