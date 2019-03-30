@@ -83,7 +83,7 @@ class Dashboard extends Component {
         let mappedPost = this.state.posts.map(post =>{
             return (
                 <div key={post.id}>
-                    <Link to={`/post/${post.id}`} ><h1>{post.title}</h1></Link>
+                    <Link to={`/post/${post.id}`}><h1>{post.title}</h1></Link>
                     <h1>{post.username}</h1>
                     <img style={{height:200,width:200}} src={post.pic}/>
                 </div>

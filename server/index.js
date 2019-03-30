@@ -1,16 +1,27 @@
 require('dotenv').config();
+const {SERVER_PORT,CONNECTION_STRING,SESSION_SECRET} = process.env;
+
 const express = require('express');
+const session = require('express-session');
+const massive = require('massive');
+
 const authCtrl = require('./auth/authController');
 const postCtrl = require('./posts/postsController');
 
-const session = require('express-session');
-const massive = require('massive');
-const {SERVER_PORT,CONNECTION_STRING,SESSION_SECRET} = process.env;
+// const pg = require('pg');
+// const pgSession = require('connect-pg-simple')(session);
 
 const app = express();
 app.use(express.json());
 
+// const pgPool = new pg.Pool({
+//     connectionString:CONNECTION_STRING
+// }) 
+
 app.use(session({
+    // store:new pgSession({
+    //     pool:pgPool
+    // }),
     secret:SESSION_SECRET,
     resave:true,
     saveUninitialized:true,
