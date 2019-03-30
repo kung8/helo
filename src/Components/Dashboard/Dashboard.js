@@ -17,7 +17,6 @@ class Dashboard extends Component {
     }
 
     componentDidMount(){
-        this.current();
         this.getAllPosts();
     }
 
@@ -33,12 +32,7 @@ class Dashboard extends Component {
         })
     }
 
-    current=async()=>{
-        if(!this.props.id){
-            let user = await axios.post('/auth/current');
-            this.props.updateUser(user.data);
-        } 
-    }
+    
 
     getAllPosts=async()=>{
         let posts = await axios.get('/posts/getAll');

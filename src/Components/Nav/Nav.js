@@ -2,10 +2,25 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import {clearUser} from '../../ducks/reducer';
+import {clearUser,updateUser} from '../../ducks/reducer';
 import {withRouter} from 'react-router-dom';
 
 class Nav extends Component {
+    constructor(){
+        super()
+
+    }
+
+    componentDidMount(){
+        this.current();
+    }
+
+    current=async()=>{
+        if(!this.props.id){
+            let user = await axios.post('/auth/current');
+            this.props.updateUser(user.data);
+        } 
+    }
 
     logout = async () => {
         await axios.post('/auth/logout');
@@ -14,6 +29,7 @@ class Nav extends Component {
       }
 
     render(){
+        console.log(this.props)
         const {username,pic} = this.props;
         if(this.props.location.pathname !== '/'){
             return (
@@ -39,10 +55,11 @@ class Nav extends Component {
 function mapStateToProps(reduxState){
     return{
         username:reduxState.username,
-        pic:reduxState.pic
+        pic:reduxState.pic,
+        id:reduxState.id
     }
 }
 
 
 
-export default withRouter(connect(mapStateToProps,{clearUser})(Nav)) 
+export default withRouter(connect(mapStateToProps,{clearUser,updateUser})(Nav)) 

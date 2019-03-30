@@ -5,7 +5,6 @@ module.exports={
         const db = req.app.get('db');
         const {username,password} = req.body;
         let user = await db.auth.check_user({username});
-        // console.log(user)
         user = user[0];
         if(user){
             res.sendStatus(409)
@@ -14,11 +13,8 @@ module.exports={
         let salt = bcrypt.genSaltSync(10);
         let hash = bcrypt.hashSync(password,salt);
         let newUser = await db.auth.register({username,password:hash,pic});
-        console.log('before',newUser);
         newUser = newUser[0];
-        console.log('after',newUser);
         req.session.user = newUser;
-        console.log(req.session.user)
         res.status(200).send(newUser)
     },
 
@@ -26,7 +22,6 @@ module.exports={
         const db = req.app.get('db')
         const {username,password} = req.body;
         let user = await db.auth.login({username});
-        console.log(user)
         user = user[0];
         if(!user){
             return res.status(401).send('email not found')
