@@ -45,7 +45,8 @@ class Dashboard extends Component {
         console.log(posts.data);
         this.props.updatePosts(posts.data);
         this.setState({
-            posts:posts.data
+            posts:posts.data,
+            search:''
         })
     }
     
@@ -63,23 +64,20 @@ class Dashboard extends Component {
             let posts = await axios.get(`/posts/getUser/${id}`)
             this.setState({
                 posts:posts.data,
-                searched:''
+                search:''
             })
         } else if(unchecked && search !== ''){
-            //axios call for containing title, not by user
             let posts = await axios.get(`/posts/getNonUser?search=${search}&id=${id}`)
-            console.log(555,posts.data)
             this.setState({
-                posts:posts.data
+                posts:posts.data,
+                search:''
             })
         } else {
             this.getAllPosts();
         }
-
     }
 
     render(){
-        const {pic,username,id} = this.props
         const {unchecked,search} = this.state;
         console.log(this.state,this.props)
         let mappedPost = this.state.posts.map(post =>{
@@ -95,7 +93,7 @@ class Dashboard extends Component {
             <div style={{display:'flex', alignItems:'center',justifyContent:'center'}}>     
                 <input value={search} onChange={e=>this.handleInput('search',e.target.value)}/>
                 <button onClick={this.searchPost}>Search</button>
-                <button>Reset</button>
+                <button onClick={this.getAllPosts}>Reset</button>
                 <p>Include My Posts</p>
                 <input value={unchecked} type="checkbox" onClick={this.handleCheck}/>
                 {mappedPost}
