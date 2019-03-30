@@ -21,9 +21,34 @@ module.exports={
         res.status(200).send(newPost)
     },
     
-    getUserPosts:async(req,res)=>{
+    getAllSearch:async(req,res)=>{
         const db = req.app.get('db');
-        const {post} = req.body;
-        const {id} = req.session.user;
+        let {search} = req.query;
+        console.log(2222,search)
+        search = `%${search}%`
+        console.log(111,search)
+        let posts = await db.post.get_all_search({search});
+        console.log(posts)
+        res.status(200).send(posts) 
     },
+
+    getUser: async(req,res)=>{
+        const db = req.app.get('db');
+        let {id} = req.params;
+        let posts = await db.post.get_user({user_id:id}) 
+        res.status(200).send(posts)
+    },
+
+    getNonUser:async(req,res)=>{
+        const db = req.app.get('db');
+        console.log(req.query)
+        let {search,id} = req.query;
+        console.log(search,id)
+        // let {id} = req.params;
+        search = `%${search}%`
+        // id = +id
+        let posts = await db.post.get_non_user({search,id}) 
+        console.log(posts) 
+        res.status(200).send(posts)
+    }
 }

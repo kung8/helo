@@ -35,7 +35,8 @@ app.post('/auth/logout',authCtrl.logout);
 
 //POST ENDPOINTS
 app.get('/posts/getAll',postCtrl.getAllPosts);
-app.get('/posts/getUser',postCtrl.getUserPosts);
 app.get('/post/get/:postid',postCtrl.getPost);
 app.post('/post/add',postCtrl.addPost);
-
+app.get('/posts/getAllSearch',postCtrl.getAllSearch);
+app.get('/posts/getUser/:id',postCtrl.getUser);
+app.get('/posts/getNonUser',postCtrl.getNonUser);

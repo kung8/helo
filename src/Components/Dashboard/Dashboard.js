@@ -11,7 +11,7 @@ class Dashboard extends Component {
 
         this.state={
             search:'',
-            checked:true,
+            unchecked:true,
             posts:[]
         }
     }
@@ -29,7 +29,7 @@ class Dashboard extends Component {
 
     handleCheck=()=>{
         this.setState({
-            checked:!this.state.checked
+            unchecked:!this.state.unchecked
         })
     }
 
@@ -49,9 +49,38 @@ class Dashboard extends Component {
         })
     }
     
+    searchPost=async()=>{
+        const {search,unchecked} = this.state;
+        const {id} =this.props;
+        if(!unchecked && search != ''){
+            let posts = await axios.get(`/posts/getAllSearch?search=${search}`)
+            console.log(444,posts.data)
+            this.setState({
+                posts:posts.data,
+                search:''
+            })
+        } else if(!unchecked && search === ''){
+            let posts = await axios.get(`/posts/getUser/${id}`)
+            this.setState({
+                posts:posts.data,
+                searched:''
+            })
+        } else if(unchecked && search !== ''){
+            //axios call for containing title, not by user
+            let posts = await axios.get(`/posts/getNonUser?search=${search}&id=${id}`)
+            console.log(555,posts.data)
+            this.setState({
+                posts:posts.data
+            })
+        } else {
+            this.getAllPosts();
+        }
+
+    }
+
     render(){
         const {pic,username,id} = this.props
-        const {checked,search} = this.state;
+        const {unchecked,search} = this.state;
         console.log(this.state,this.props)
         let mappedPost = this.state.posts.map(post =>{
             return (
@@ -65,10 +94,10 @@ class Dashboard extends Component {
         return(
             <div style={{display:'flex', alignItems:'center',justifyContent:'center'}}>     
                 <input value={search} onChange={e=>this.handleInput('search',e.target.value)}/>
-                <button>Search</button>
+                <button onClick={this.searchPost}>Search</button>
                 <button>Reset</button>
-                <p>My Posts</p>
-                <input value={checked} type="checkbox" onClick={this.handleCheck}/>
+                <p>Include My Posts</p>
+                <input value={unchecked} type="checkbox" onClick={this.handleCheck}/>
                 {mappedPost}
             </div>
         )
