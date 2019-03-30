@@ -33,7 +33,6 @@ class Auth extends Component {
     register=async()=>{
         const {username,password} = this.state;
         let user = await axios.post('/auth/register',{username,password});
-        console.log(user.data);
         user = user.data;
         this.props.updateUser(user);
         this.props.history.push('/dashboard');
@@ -45,13 +44,30 @@ class Auth extends Component {
 
     render(){
         const {username,password} = this.state;
-        console.log(this.props)
         return(
-            <div>
-                <input value={username} type='text' placeholder="Username" onChange={e=>this.handleInput('username',e.target.value)}/>
-                <input value={password} type='password' placeholder="Password" onChange={e=>this.handleInput('password',e.target.value)}/>
-                <button onClick={this.login}>Login</button>
-                <button onClick={this.register}>Register</button>
+            <div className="entire-auth-section-body">
+                <div className="entire-auth-center-box">
+                    <div className="auth-content-holder">
+                        <div className="auth-logo-name-holder">
+                            <i className="far fa-smile-wink"/>
+                            <h1>Helo</h1>
+                            <div className="auth-input-holder">
+                                <p>Username:</p>
+                                <input 
+                                    value={username} type='text' placeholder="Username" onChange={e=>this.handleInput('username',e.target.value)}/>
+                            </div>
+                            <div className="auth-input-holder">
+                                <p>Password:</p>
+                                <input 
+                                    value={password} type='password' placeholder="Password" onChange={e=>this.handleInput('password',e.target.value)}/>
+                            </div>
+                            <div className="auth-button-holder">
+                                <button onClick={this.login}>Login</button>
+                                <button onClick={this.register}>Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
