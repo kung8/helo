@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { map } from 'rsvp';
 import {updatePosts} from '../../ducks/reducer';
 
 class Form extends Component {
