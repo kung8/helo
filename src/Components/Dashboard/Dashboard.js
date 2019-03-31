@@ -5,6 +5,18 @@ import {Link} from 'react-router-dom';
 import {updatePosts} from '../../ducks/reducer';
 import Loader from '../Loader/Loader';
 
+const image = {fontSize:25,background:'orange',height:30,width:25};
+const myPost = {fontSize:20};
+const check = {marginLeft:5,marginRight:10};
+const map = {background:'white',width:'70%',marginTop:'5px',marginLeft:'15vw'};
+const posts = {display:'flex',flexDirection:'column',width:'95%'};
+const postDiv = {justifyContent:'space-between',display:'flex',border:'black solid',marginBottom:4,marginTop:5};
+const title = {marginLeft:10};
+const link = {textDecoration:'none',color:'black'};
+const right = {display:'flex',alignItems:'center'};
+const username = {display:'flex',alignItems:'center'};
+const pic = {height:60,width:60,borderRadius:'50%',boxShadow:'2px 1px 5px 1px black',marginRight:10};
+
 class Dashboard extends Component {
     constructor(){
         super();
@@ -85,14 +97,14 @@ class Dashboard extends Component {
         console.log(this.state,this.props)
         let mappedPost = this.state.posts.map(post =>{
             return (
-                <div key={post.id} style={{display:'flex',flexDirection:'column',width:'95%'}}>
-                    <div style={{justifyContent:'space-between',display:'flex',border:'black solid',marginBottom:4,marginTop:5}}>
-                        <div style={{marginLeft:10}}>
-                            <Link to={`/post/${post.id}`} style={{textDecoration:'none',color:'black'}}><h1>{post.title}</h1></Link>
+                <div key={post.id} style={posts}>
+                    <div style={postDiv}>
+                        <div style={title}>
+                            <Link to={`/post/${post.id}`} style={link}><h1>{post.title}</h1></Link>
                         </div>
-                        <div style={{display:'flex',alignItems:'center'}}>
-                            <h1 style={{marginRight:5}}>by {post.username}</h1>
-                            <img style={{height:60,width:60,borderRadius:'50%',boxShadow:'2px 1px 5px 1px black',marginRight:10}} src={post.pic}/>
+                        <div style={right}>
+                            <h1 style={username}>by {post.username}</h1>
+                            <img style={pic} src={post.pic}/>
                         </div>
                     </div>
                 </div>
@@ -100,21 +112,34 @@ class Dashboard extends Component {
         })
 
         return(
-            <div style={{width:'90vw',marginLeft:'10vw',height:'100vh',background:'lightgrey',overflowY:'scroll'}}>
-                <div style={{background:'white',width:'70%',marginTop:'5vh',marginLeft:'15vw'}}>
-                    <div style={{display:'flex', alignItems:'center',justifyContent:'space-between'}}>
-                        <div style={{width:'80%'}}>
-                            <input style={{width:'85%',height:25,fontSize:20,marginLeft:10}} value={search} placeholder="Search by Title" onChange={e=>this.handleInput('search',e.target.value)}/>
-                            <i style={{fontSize:25,background:'orange',height:30,width:25}} onClick={this.searchPost} class="fas fa-search"></i>
-                            <button style={{height:30,fontSize:20,background:'black',color:'white'}}onClick={this.getAllPosts}>Reset</button>
+            <div className="entire-dashboard-section-body">
+                <div className="dashboard-search-section">
+                    <div>
+                        <div className="search-div">
+                            <input 
+                                value={search} 
+                                placeholder="Search by Title" 
+                                onChange={e=>this.handleInput('search',e.target.value)}
+                                />
+                            <i 
+                                style={image} 
+                                onClick={this.searchPost} 
+                                class="fas fa-search"
+                                />
+                            <button onClick={this.getAllPosts}>Reset</button>
                         </div>
-                        <div style={{display:'flex',alignItems:'center'}}>
-                            <p style={{fontSize:20}}>My Posts</p>
-                            <input style={{marginLeft:5,marginRight:10}} value={unchecked} type="checkbox" onClick={this.handleCheck}/>
+                        <div className="my-post-div">
+                            <p style={myPost}>My Posts</p>
+                            <input 
+                            style={check} 
+                            value={unchecked} 
+                            type="checkbox" 
+                            onChange={this.handleCheck}
+                            />
                         </div>     
                     </div>
                 </div>
-                <div style={{background:'white',width:'70%',marginTop:'5px',marginLeft:'15vw'}}>
+                <div style={map}>
                     <Loader isLoaded={this.state.isLoaded}>
                         {mappedPost}
                     </Loader>

@@ -144,3 +144,48 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/*********************Dashboard**************************/
+.entire-dashboard-section-body {
+  width:90vw;
+  margin-left:10vw;
+  height:100vh;
+  background:lightgrey;
+  overflow-Y:scroll;
+}
+
+.dashboard-search-section {
+  background:white;
+  width:70%;
+  margin-top:5vh;
+  margin-left:15vw;
+}
+
+.dashboard-search-section > div {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.search-div {
+  width:80%
+}
+
+.search-div > input {
+  width:85%;
+  height:25px;
+  font-size:20px;
+  margin-left:10px;
+}
+
+.search-div > button {
+  height:30px;
+  font-size: 20px;
+  background:black;
+  color:white;
+}
+
+.my-post-div {
+  display:flex;
+  align-items: center;
+}
