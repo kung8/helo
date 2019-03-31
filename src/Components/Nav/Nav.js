@@ -5,8 +5,9 @@ import axios from 'axios';
 import {clearUser,updateUser} from '../../ducks/reducer';
 import {withRouter} from 'react-router-dom';
 
-const image = {fontSize:60,color:'white'}
-const logout = {display:'flex',flexDirection:'column',alignItems:'center',marginBottom:10}
+const image = {fontSize:60,color:'white'};
+const logout = {display:'flex',flexDirection:'column',alignItems:'center',marginBottom:10};
+
 class Nav extends Component {
     constructor(){
         super()

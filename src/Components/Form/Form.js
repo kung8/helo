@@ -41,7 +41,7 @@ class Form extends Component {
     render(){
 
         return(
-            <div>
+            <div style={{background:'red',marginLeft:'300px'}}>
                 <h1>New Post</h1>
                 <h3>Title:</h3>
                 <input onChange={e=>this.handleInput('title',e.target.value)}/>

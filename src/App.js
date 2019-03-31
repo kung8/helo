@@ -8,7 +8,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="body">
         <Nav location={this.props.location} logout={this.logout}/>
         {routes}
       </div>
