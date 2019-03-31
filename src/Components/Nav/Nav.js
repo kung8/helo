@@ -5,10 +5,11 @@ import axios from 'axios';
 import {clearUser,updateUser} from '../../ducks/reducer';
 import {withRouter} from 'react-router-dom';
 
+const image = {fontSize:60,color:'white'}
+const logout = {display:'flex',flexDirection:'column',alignItems:'center',marginBottom:10}
 class Nav extends Component {
     constructor(){
         super()
-
     }
 
     componentDidMount(){
@@ -26,30 +27,33 @@ class Nav extends Component {
         await axios.post('/auth/logout');
         this.props.clearUser();
         this.props.history.push('/')
-      }
+    }
 
     render(){
-        console.log(this.props)
         const {username,pic} = this.props;
         if(this.props.location.pathname !== '/'){
             return (
-                <div>
-                    <h1>{username}</h1>
-                    <img style={{height:100,width:100,borderRadius:'50%'}} src={pic} alt="profile pic"/>
-                    <Link to='/dashboard'>
-                        <button>Home</button>
-                    </Link>
-                    <Link to='/new'>
-                        <button>New Post</button>
-                    </Link>
-                    <button onClick={this.logout}>Logout</button>
+                <div className="entire-nav-bar">
+                    <div className="nav-bar-content-holder">
+                        <div className="nav-bar-image-username-holder">
+                            <img src={pic} alt="profile pic"/>
+                            <h1>{username}</h1>
+                        </div>
+                        <div className="nav-bar-routing-buttons-holder">
+                            <div className="nav-bar-dashboard-form-routing-button-holder">
+                                <Link to='/dashboard'><i style={image} className="fas fa-home"/></Link>
+                                <Link to='/new'><i style={image} className="far fa-file-alt"/></Link>
+                            </div>
+                            <div style={logout}>
+                                <i style={image} onClick={this.logout} className="fas fa-power-off"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )
         }
         return null    
-        
     }
-    
 }
 
 function mapStateToProps(reduxState){
@@ -59,7 +63,5 @@ function mapStateToProps(reduxState){
         id:reduxState.id
     }
 }
-
-
 
 export default withRouter(connect(mapStateToProps,{clearUser,updateUser})(Nav)) 
