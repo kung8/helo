@@ -3,6 +3,8 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {updatePosts} from '../../ducks/reducer';
 
+const image = {height:'45%',width:'50%',marginLeft:'25%',marginTop:'2%'};
+
 class Form extends Component {
     constructor(){
         super();
@@ -51,7 +53,7 @@ class Form extends Component {
                             <h3>Title:</h3>
                             <input onChange={e=>this.handleInput('title',e.target.value)}/>
                         </div>
-                        <img style={{height:'45%',width:'50%',marginLeft:'25%',marginTop:'2%'}}/>
+                        <img style={image}/>
                         <div className="new-post-image-input">
                             <h3>Image URL:</h3>
                             <input onChange={e=>this.handleInput('pic',e.target.value)}/>

@@ -275,7 +275,9 @@
 
 .new-post-content-input > textarea {
   max-height:120px;
+  min-height:120px;
   font-size:25px;
+  min-width:99%;
   max-width:99%;
 }
 
