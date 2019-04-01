@@ -27,12 +27,20 @@ class Post extends Component {
         console.log(this.props)
         const {post} = this.state
         return(
-            <div style={{display:'flex'}}>
-                <p>{post.username}</p>
-                <img style={{width:200,height:200}} src={post.pic}/>
-                <p>{post.title}</p>
-                <img style={{width:200,height:200}}src={post.post_pic}/>
-                <p>{post.post}</p>
+            <div style={{width:'90vw',height:'100vh',background:'#f2f2f2',marginLeft:'10vw',position:'relative'}}>
+                <div style={{position:'absolute',top:'5%', display:'flex',flexDirection:'column',background:'white',width:'80%',marginLeft:'10%',maxHeight:'75%'}}>
+                    <div style={{display:'flex', alignItems:'center',justifyContent:'space-between',width:'94%',marginLeft:'3%'}}>
+                        <p style={{color:'#ff9770',fontSize:50}}>{post.title}</p>
+                        <div style={{display:'flex'}}>
+                            <p style={{fontSize:35,marginRight:5}}>{post.username}</p>
+                            <img style={{width:75,height:75,borderRadius:'50%'}} src={post.pic}/>
+                        </div>
+                    </div>
+                    <div style={{marginTop:'0', marginBottom:20,display:'flex',width:'94%',marginLeft:'3%'}}>
+                        <img style={{width:'45%',height:'100%'}}src={post.post_pic}/>
+                        <p style={{fontSize:25,marginLeft:'5%'}}>{post.post}</p>
+                    </div>
+                </div>
             </div>
         )
     }

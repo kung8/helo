@@ -13,9 +13,9 @@ const posts = {display:'flex',flexDirection:'column',width:'95%'};
 const postDiv = {justifyContent:'space-between',display:'flex',border:'black solid',marginBottom:4,marginTop:5};
 const title = {marginLeft:10};
 const link = {textDecoration:'none',color:'black'};
-const right = {display:'flex',alignItems:'center'};
-const username = {display:'flex',alignItems:'center',marginRight:'5px'};
-const pic = {height:60,width:60,borderRadius:'50%',boxShadow:'2px 1px 5px 1px black',marginRight:10};
+const right = {display:'flex'};
+const username = {display:'flex',alignItems:'center',marginRight:'10px',marginBottom:3};
+const pic = {height:60,width:60,borderRadius:'50%',boxShadow:'2px 1px 5px 1px black',marginRight:10,marginTop:10};
 
 class Dashboard extends Component {
     constructor(){
